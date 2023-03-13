@@ -58,8 +58,8 @@ class UserController extends Controller
             ], 500);
         }
     }
-    public function getToto($request)
+    public function getToto()
     {
-        dd($request);
+        dd("toto");
     }
 }
