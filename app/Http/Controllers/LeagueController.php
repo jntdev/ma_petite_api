@@ -25,7 +25,7 @@ class LeagueController extends Controller
         try{
             $league = League::create([
                 'name' => $request->name,
-                'user_id' => $currentUser->id,
+                'owner_id' => $currentUser->id,
                 'code'=> $code
             ]);
            $request->merge(["league_id" => $league->id]);
@@ -56,7 +56,7 @@ class LeagueController extends Controller
         try{
             LeaguePlayerMatch::create([
                 'league_id'=> $request->league_id ?? $league->id,
-                'owner_id'=>$currentUser->id
+                'user_id'=>$currentUser->id
             ]);
             User::where("id", $currentUser->id )->update([
                 "current_league_id" => $league->id
