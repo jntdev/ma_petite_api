@@ -34,6 +34,7 @@ class LeagueController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'League created and joined successfully',
+                'code' => $league->code
             ], 200);
 
         } catch (Throwable $th) {
