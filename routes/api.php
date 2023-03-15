@@ -28,4 +28,6 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/createLeague', [LeagueController::class, 'store']);
     Route::post('/joinLeague', [LeagueController::class, 'joinLeague']);
+    Route::get('/getUser/{id}', [UserController::class, 'getUser']);
+    
 });
