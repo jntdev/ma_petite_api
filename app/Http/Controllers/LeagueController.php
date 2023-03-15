@@ -78,7 +78,7 @@ class LeagueController extends Controller
     /**
      * @return JsonResponse
      */
-    public function getLeagues(): JsonResponse
+    public function getAllLeagues(): JsonResponse
     {
         try{
         $leaguesQuery  = League::all();
@@ -101,8 +101,8 @@ class LeagueController extends Controller
                 $league = [
                    "id" => $league->id,
                    "name"=> $league->name,
-                   "owner" => $owner,
                    "code"=>$league->code,
+                   "owner" => $owner,
                    "members"=> $players
                 ];
                 $leagues[$key] = $league;
@@ -135,7 +135,7 @@ class LeagueController extends Controller
         }
         return $randomString;
     }
-    public function getallMyLeagues(): JsonResponse
+    public function getLeagues(): JsonResponse
     {
         try{
             $me = auth()->user();

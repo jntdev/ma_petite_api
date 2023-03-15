@@ -24,11 +24,11 @@ Route::group([
     ]
 ], function () {
     Route::get('/getUsers', [UserController::class, 'getUsers']);
-    Route::get('/getAllLeagues', [LeagueController::class, 'getLeagues']);
+    Route::get('/getAllLeagues', [LeagueController::class, 'getAllLeagues']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/createLeague', [LeagueController::class, 'store']);
     Route::post('/joinLeague', [LeagueController::class, 'joinLeague']);
-    Route::get('/getLeagues', [LeagueController::class, 'getAllMyLeagues']);
+    Route::get('/getLeagues', [LeagueController::class, 'getLeagues']);
     Route::get('/getUser', [UserController::class, 'getUser']);
     
 });
