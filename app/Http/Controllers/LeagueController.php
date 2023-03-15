@@ -29,7 +29,7 @@ class LeagueController extends Controller
                 'code'=> $code
             ]);
            $request->merge(["league_id" => $league->id]);
-            $this->joinLeague($request);
+            //$this->joinLeague($request);
 
             return response()->json([
                 'status' => true,
@@ -65,6 +65,7 @@ class LeagueController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'League joined successfully',
+                'league' => $league
             ], 200);
         }catch(Throwable $th){
             return response()->json([
@@ -132,5 +133,33 @@ class LeagueController extends Controller
             $randomString .= $characters[random_int(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+    public function getallMyLeagues(): JsonResponse
+    {
+        try{
+            $me = auth()->user();
+            $myLeaguesQuery = LeaguePlayerMatch::where("user_id", $me->id)->select(["user_id", "league_id"])->groupBy(["user_id", "league_id"])->get();
+            $leagues=[];
+            foreach($myLeaguesQuery as $key => $oneOfMyLeague){
+                $leagues[$key] = [
+                    "id" => $oneOfMyLeague->league->id,
+                    "name" => $oneOfMyLeague->league->name,
+                    "code" => $oneOfMyLeague->league->code,
+                    "owner"=> $oneOfMyLeague->league->Owner,
+                    "members"=>$oneOfMyLeague->league->Members
+                ];
+
+            }
+            return response()->json([
+                'status' => true,
+                'message' => $leagues,
+            ], 200);
+        } catch (Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+        
     }
 }

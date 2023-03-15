@@ -58,10 +58,11 @@ class UserController extends Controller
             ], 500);
         }
     }
-    public function getUser($id)
+    public function getUser()
     {
+        $me = auth()->user();
         try{
-            $me = User::where("id", $id)->first();
+            $me = User::where("id", $me->id)->first();
             return response()->json([
                 'status' => true,
                 'message' => $me
