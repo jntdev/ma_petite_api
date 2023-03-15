@@ -102,6 +102,7 @@ class LeagueController extends Controller
                    "id" => $league->id,
                    "name"=> $league->name,
                    "owner" => $owner,
+                   "code"=>$league->code,
                    "members"=> $players
                 ];
                 $leagues[$key] = $league;
